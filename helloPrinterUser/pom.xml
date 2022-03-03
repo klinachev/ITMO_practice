@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>hello.user</groupId>
+    <artifactId>osgi.hello.user</artifactId>
+    <packaging>bundle</packaging>
+    <version>1.0.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>hello.printer</groupId>
+            <artifactId>hello.printer</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <name>hello printer user</name>
+
+    <parent>
+        <groupId>hello</groupId>
+        <artifactId>osgi.hello</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <build>
+        <finalName>kav_hello_user</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>
+                            kav_hello_user
+                        </Bundle-SymbolicName>
+                        <Bundle-Name>
+                            Hello printer user
+                        </Bundle-Name>
+                        <Bundle-Version>
+                            ${project.version}
+                        </Bundle-Version>
+                        <Bundle-Activator>
+                            hello.user.Activator
+                        </Bundle-Activator>
+                        <Private-Package>
+                            hello.user.*
+                        </Private-Package>
+                        <Import-Package>
+                            hello.printer,
+                            org.osgi.util.tracker,
+                            org.osgi.framework
+                        </Import-Package>
+                    </instructions>
+                    <buildDirectory>
+                        ${basedir}/../bundles
+                    </buildDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
