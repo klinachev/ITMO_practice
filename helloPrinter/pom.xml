@@ -39,7 +39,7 @@
                             ${project.groupId}.Activator
                         </Bundle-Activator>
                         <Export-Package>
-                            hello.printer.*
+                            ru.itmo.osgi.hello.printer.*
                         </Export-Package>
                     </instructions>
                     <buildDirectory>
