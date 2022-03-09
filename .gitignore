@@ -26,3 +26,5 @@ hs_err_pid*
 /bundles/
 /helloPrinter/target/
 /helloPrinterUser/target/
+/byePrinter/target/
+/byePrinterUser/target/
