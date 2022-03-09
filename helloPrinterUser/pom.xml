@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>hello.user</groupId>
-    <artifactId>osgi.hello.user</artifactId>
+    <groupId>ru.itmo.osgi.hello.user</groupId>
+    <artifactId>hello.user</artifactId>
     <packaging>bundle</packaging>
     <version>1.0.0</version>
     <dependencies>
         <dependency>
-            <groupId>hello.printer</groupId>
+            <groupId>ru.itmo.osgi.hello.printer</groupId>
             <artifactId>hello.printer</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
@@ -19,8 +19,8 @@
     <name>hello printer user</name>
 
     <parent>
-        <groupId>hello</groupId>
-        <artifactId>osgi.hello</artifactId>
+        <groupId>ru.itmo.osgi</groupId>
+        <artifactId>osgi</artifactId>
         <version>1.0.0</version>
     </parent>
 
@@ -35,22 +35,19 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>
-                            kav_hello_user
+                            ${project.artifactId}
                         </Bundle-SymbolicName>
                         <Bundle-Name>
-                            Hello printer user
+                            ${project.name}
                         </Bundle-Name>
                         <Bundle-Version>
                             ${project.version}
                         </Bundle-Version>
                         <Bundle-Activator>
-                            hello.user.Activator
+                            ${project.groupId}.Activator
                         </Bundle-Activator>
-                        <Private-Package>
-                            hello.user.*
-                        </Private-Package>
                         <Import-Package>
-                            hello.printer,
+                            ru.itmo.osgi.hello.printer,
                             org.osgi.util.tracker,
                             org.osgi.framework
                         </Import-Package>

@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>hello.printer</groupId>
+    <groupId>ru.itmo.osgi.hello.printer</groupId>
     <artifactId>hello.printer</artifactId>
     <packaging>bundle</packaging>
     <version>1.0.0</version>
     <name>hello printer</name>
 
     <parent>
-        <groupId>hello</groupId>
-        <artifactId>osgi.hello</artifactId>
+        <groupId>ru.itmo.osgi</groupId>
+        <artifactId>osgi</artifactId>
         <version>1.0.0</version>
     </parent>
 
@@ -27,19 +27,19 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>
-                            kav_hello
+                            ${project.artifactId}
                         </Bundle-SymbolicName>
                         <Bundle-Name>
-                            Hello printer
+                            ${project.name}
                         </Bundle-Name>
                         <Bundle-Version>
                             ${project.version}
                         </Bundle-Version>
                         <Bundle-Activator>
-                            hello.printer.Activator
+                            ${project.groupId}.Activator
                         </Bundle-Activator>
                         <Export-Package>
-                            hello.*
+                            hello.printer.*
                         </Export-Package>
                     </instructions>
                     <buildDirectory>

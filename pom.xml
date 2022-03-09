@@ -4,11 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>hello</groupId>
-    <artifactId>osgi.hello</artifactId>
+    <groupId>ru.itmo.osgi</groupId>
+    <artifactId>osgi</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <name>hello</name>
+
 
     <dependencies>
         <dependency>
@@ -45,49 +46,11 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <modules>
         <module>helloPrinter</module>
         <module>helloPrinterUser</module>
     </modules>
-
-    <build>
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.felix</groupId>-->
-<!--                <artifactId>maven-bundle-plugin</artifactId>-->
-<!--                <version>2.3.7</version>-->
-<!--                <extensions>true</extensions>-->
-<!--                <configuration>-->
-<!--                    <instructions>-->
-<!--                        <Bundle-SymbolicName>-->
-<!--                            kav_hello-->
-<!--                        </Bundle-SymbolicName>-->
-<!--                        <Bundle-Name>-->
-<!--                            Hello printer-->
-<!--                        </Bundle-Name>-->
-<!--                        <Bundle-Version>-->
-<!--                            ${project.version}-->
-<!--                        </Bundle-Version>-->
-<!--                        <Bundle-Activator>-->
-<!--                            hello.hello.printer.Activator-->
-<!--                        </Bundle-Activator>-->
-<!--                        <Private-Package>-->
-<!--                            hello.printer-->
-<!--                        </Private-Package>-->
-<!--                        <Export-Package>-->
-<!--                            hello.printer-->
-<!--                        </Export-Package>-->
-<!--                    </instructions>-->
-<!--&lt;!&ndash;                    <outputDirectory>&ndash;&gt;-->
-<!--&lt;!&ndash;                        ${basedir}/target/classes&ndash;&gt;-->
-<!--&lt;!&ndash;                    </outputDirectory>&ndash;&gt;-->
-<!--                    <buildDirectory>-->
-<!--                        ${basedir}/../bundles-->
-<!--                    </buildDirectory>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-    </build>
 </project>

@@ -1,6 +1,6 @@
-package hello.printer.impl;
+package ru.itmo.osgi.hello.printer.impl;
 
-import hello.printer.HelloPrinter;
+import ru.itmo.osgi.hello.printer.HelloPrinter;
 
 public class HelloPrinterImpl implements HelloPrinter {
     @Override

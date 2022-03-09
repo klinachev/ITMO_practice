@@ -1,6 +1,6 @@
-package hello.printer;
+package ru.itmo.osgi.hello.printer;
 
-import hello.printer.impl.HelloPrinterImpl;
+import ru.itmo.osgi.hello.printer.impl.HelloPrinterImpl;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
