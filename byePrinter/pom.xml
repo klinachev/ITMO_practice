@@ -57,9 +57,6 @@
                             src/main/java,
                             target/classes
                         </Include-Resource>
-<!--                        <Service-Component>-->
-<!--                            target/OSGI-INF/ru.itmo.osgi.bye.printer.impl.ByePrinterImpl.xml-->
-<!--                        </Service-Component>-->
                     </instructions>
                     <buildDirectory>
                         ${basedir}/../bundles

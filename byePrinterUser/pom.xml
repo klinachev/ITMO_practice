@@ -16,11 +16,6 @@
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.kill-bill.billing.plugin.java</groupId>
-            <artifactId>avatax-plugin</artifactId>
-            <version>0.5.1</version>
-        </dependency>
     </dependencies>
 
     <name>bye printer user</name>
