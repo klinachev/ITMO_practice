@@ -49,12 +49,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.scr.annotations</artifactId>
-            <version>1.12.0</version>
-            <scope>provided</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.felix</groupId>-->
+<!--            <artifactId>org.apache.felix.scr.annotations</artifactId>-->
+<!--            <version>1.12.0</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.osgi</groupId>
@@ -81,6 +81,6 @@
         <module>helloPrinterUser</module>
         <module>byePrinter</module>
         <module>byePrinterUser</module>
-        <module>helloConsoleCommand</module>
+        <module>helloConsoleService</module>
     </modules>
 </project>

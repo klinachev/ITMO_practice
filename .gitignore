@@ -28,4 +28,4 @@ hs_err_pid*
 /helloPrinterUser/target/
 /byePrinter/target/
 /byePrinterUser/target/
-/helloConsoleCommand/target/
+/helloConsoleService/target/
