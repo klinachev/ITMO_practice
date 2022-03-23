@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.itmo.osgi.bye.printer</groupId>
+    <artifactId>bye.printer</artifactId>
+    <packaging>bundle</packaging>
+    <version>1.0.0</version>
+    <name>bye printer</name>
+
+
+    <parent>
+        <groupId>ru.itmo.osgi.task3</groupId>
+        <artifactId>osgi.task3</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <build>
+        <finalName>kav_bye</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+                <version>1.25.0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>
+                            ${project.artifactId}
+                        </Bundle-SymbolicName>
+                        <Bundle-Name>
+                            ${project.name}
+                        </Bundle-Name>
+                        <Bundle-Version>
+                            ${project.version}
+                        </Bundle-Version>
+                        <Export-Package>
+                            ru.itmo.osgi.bye.printer.*
+                        </Export-Package>
+                        <Include-Resource>
+                            src/main/java,
+                            target/classes
+                        </Include-Resource>
+                    </instructions>
+                    <buildDirectory>
+                        ${basedir}/../../bundles
+                    </buildDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

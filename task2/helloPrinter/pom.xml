@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.itmo.osgi.hello.printer</groupId>
+    <artifactId>hello.printer</artifactId>
+    <packaging>bundle</packaging>
+    <version>1.0.0</version>
+    <name>hello printer</name>
+
+    <parent>
+        <groupId>ru.itmo.osgi.task2</groupId>
+        <artifactId>osgi.task2</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <build>
+        <finalName>kav_hello</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>
+                            ${project.artifactId}
+                        </Bundle-SymbolicName>
+                        <Bundle-Name>
+                            ${project.name}
+                        </Bundle-Name>
+                        <Bundle-Version>
+                            ${project.version}
+                        </Bundle-Version>
+                        <Bundle-Activator>
+                            ${project.groupId}.Activator
+                        </Bundle-Activator>
+                        <Export-Package>
+                            ru.itmo.osgi.hello.printer.*
+                        </Export-Package>
+                    </instructions>
+                    <buildDirectory>
+                        ${basedir}/../../bundles
+                    </buildDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
