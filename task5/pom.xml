@@ -26,7 +26,8 @@
 
     </dependencies>
     <modules>
-        <module>newsStatsConsoleService</module>
+        <module>newsConsoleCommand</module>
+        <module>newsStatsService</module>
         <module>lentaNewsService</module>
         <module>aifNewsService</module>
         <module>dpNewsService</module>

@@ -1,13 +1,10 @@
 package ru.itmo.osgi.news.dp.impl;
 
 import org.osgi.service.component.annotations.Component;
-import ru.itmo.osgi.news.stats.search.AbstractNewsStats;
-import ru.itmo.osgi.news.stats.search.NewsStats;
+import ru.itmo.osgi.news.stats.AbstractNewsStats;
+import ru.itmo.osgi.news.stats.NewsStats;
 
 @Component(
-        property = {
-                "type=dpNews"
-        },
         service = NewsStats.class,
         immediate = true
 )
@@ -18,4 +15,15 @@ public class DpNews extends AbstractNewsStats {
     protected String url() {
         return DP_URL;
     }
+
+    @Override
+    public String commandName() {
+        return "dp";
+    }
+
+    @Override
+    public String fullServiceName() {
+        return "Delovoy Peterburg";
+    }
+
 }

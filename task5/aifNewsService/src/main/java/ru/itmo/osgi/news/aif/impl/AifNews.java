@@ -1,13 +1,10 @@
 package ru.itmo.osgi.news.aif.impl;
 
 import org.osgi.service.component.annotations.Component;
-import ru.itmo.osgi.news.stats.search.AbstractNewsStats;
-import ru.itmo.osgi.news.stats.search.NewsStats;
+import ru.itmo.osgi.news.stats.AbstractNewsStats;
+import ru.itmo.osgi.news.stats.NewsStats;
 
 @Component(
-        property = {
-                "type=aifNews"
-        },
         service = NewsStats.class,
         immediate = true
 )
@@ -17,5 +14,15 @@ public class AifNews extends AbstractNewsStats {
     @Override
     protected String url() {
         return AIF_URL;
+    }
+
+    @Override
+    public String commandName() {
+        return "aif";
+    }
+
+    @Override
+    public String fullServiceName() {
+        return "Argumenty i Fakty";
     }
 }

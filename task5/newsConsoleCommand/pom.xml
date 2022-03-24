@@ -4,12 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.itmo.osgi.news.stats</groupId>
-    <artifactId>news.stats</artifactId>
+    <groupId>ru.itmo.osgi.news.console</groupId>
+    <artifactId>news.console</artifactId>
     <packaging>bundle</packaging>
     <version>1.0.0</version>
-    <name>news stats console command service</name>
+    <name>news console command</name>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>ru.itmo.osgi.news.stats</groupId>
+            <artifactId>news.stats</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <parent>
         <groupId>ru.itmo.osgi.task5</groupId>
@@ -18,7 +27,7 @@
     </parent>
 
     <build>
-        <finalName>kav_consoleCommandNews</finalName>
+        <finalName>kav_newsConsoleCommand</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -38,7 +47,7 @@
                             ${project.version}
                         </Bundle-Version>
                         <Export-Package>
-                            ru.itmo.osgi.news.stats.*
+                            ru.itmo.osgi.news.console.*
                         </Export-Package>
                         <Include-Resource>
                             src/main/java,

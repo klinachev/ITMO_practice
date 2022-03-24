@@ -4,21 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.itmo.osgi.bye.printer</groupId>
-    <artifactId>bye.printer</artifactId>
+    <groupId>ru.itmo.osgi.news.stats</groupId>
+    <artifactId>news.stats</artifactId>
     <packaging>bundle</packaging>
     <version>1.0.0</version>
-    <name>bye printer</name>
+    <name>news stats service</name>
 
 
     <parent>
-        <groupId>ru.itmo.osgi.task3</groupId>
-        <artifactId>osgi.task3</artifactId>
+        <groupId>ru.itmo.osgi.task5</groupId>
+        <artifactId>osgi.task5</artifactId>
         <version>1.0.0</version>
     </parent>
 
     <build>
-        <finalName>kav_bye</finalName>
+        <finalName>kav_NewsStats</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -26,6 +26,7 @@
                 <version>5.1.4</version>
                 <extensions>true</extensions>
                 <configuration>
+
                     <instructions>
                         <Bundle-SymbolicName>
                             ${project.artifactId}
@@ -37,7 +38,7 @@
                             ${project.version}
                         </Bundle-Version>
                         <Export-Package>
-                            ru.itmo.osgi.bye.printer.*
+                            ru.itmo.osgi.news.stats.*
                         </Export-Package>
                         <Include-Resource>
                             src/main/java,

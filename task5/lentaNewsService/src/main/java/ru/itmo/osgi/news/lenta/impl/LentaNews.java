@@ -2,13 +2,10 @@ package ru.itmo.osgi.news.lenta.impl;
 
 
 import org.osgi.service.component.annotations.Component;
-import ru.itmo.osgi.news.stats.search.AbstractNewsStats;
-import ru.itmo.osgi.news.stats.search.NewsStats;
+import ru.itmo.osgi.news.stats.AbstractNewsStats;
+import ru.itmo.osgi.news.stats.NewsStats;
 
 @Component(
-        property = {
-                "type=lentaNews"
-        },
         service = NewsStats.class,
         immediate = true
 )
@@ -19,5 +16,15 @@ public class LentaNews extends AbstractNewsStats {
     @Override
     protected String url() {
         return LENTA_URL;
+    }
+
+    @Override
+    public String commandName() {
+        return "lenta";
+    }
+
+    @Override
+    public String fullServiceName() {
+        return "Lenta.ru";
     }
 }

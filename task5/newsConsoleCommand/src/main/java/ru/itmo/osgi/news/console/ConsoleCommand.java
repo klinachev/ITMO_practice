@@ -1,4 +1,4 @@
-package ru.itmo.osgi.news.stats.console;
+package ru.itmo.osgi.news.console;
 
 public interface ConsoleCommand {
     void stats();

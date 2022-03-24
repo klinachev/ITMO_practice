@@ -1,4 +1,4 @@
-package ru.itmo.osgi.news.stats.search;
+package ru.itmo.osgi.news.stats;
 
 
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -10,7 +10,6 @@ import com.rometools.rome.io.XmlReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractNewsStats implements NewsStats {
@@ -27,15 +26,11 @@ public abstract class AbstractNewsStats implements NewsStats {
 
     @Override
     public List<String> findNews() throws IOException {
-        try {
-            SyndFeed syndFeed = parseFeed(url());
-            List<String> titles = new ArrayList<>();
-            for (SyndEntry entry : syndFeed.getEntries()) {
-                titles.add(entry.getTitle());
-            }
-            return titles;
-        } catch (Exception e) {
-            return Collections.emptyList();
+        SyndFeed syndFeed = parseFeed(url());
+        List<String> titles = new ArrayList<>();
+        for (SyndEntry entry : syndFeed.getEntries()) {
+            titles.add(entry.getTitle());
         }
+        return titles;
     }
 }
