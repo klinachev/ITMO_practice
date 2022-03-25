@@ -1,10 +1,11 @@
 package ru.itmo.osgi.news.stats;
 
-import java.io.IOException;
+import ru.itmo.osgi.news.stats.exception.NewsSearchException;
+
 import java.util.List;
 
 public interface NewsStats {
-    List<String> findNews() throws IOException;
+    List<String> findNews() throws NewsSearchException;
 
     String commandName();
 

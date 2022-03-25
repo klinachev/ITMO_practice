@@ -26,7 +26,7 @@
     </parent>
 
     <build>
-        <finalName>kav_aifNewsService</finalName>
+        <finalName>kav_aif_news_service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>

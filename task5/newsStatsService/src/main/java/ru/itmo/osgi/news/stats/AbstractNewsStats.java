@@ -6,6 +6,7 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
+import ru.itmo.osgi.news.stats.exception.NewsSearchException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,16 +17,16 @@ public abstract class AbstractNewsStats implements NewsStats {
 
     protected abstract String url();
 
-    protected SyndFeed parseFeed(String url) throws IOException {
+    protected SyndFeed parseFeed(String url) throws NewsSearchException {
         try {
             return new SyndFeedInput().build(new XmlReader(new URL(url)));
-        } catch (FeedException e) {
-            throw new RuntimeException(e);
+        } catch (FeedException | IOException e) {
+            throw new NewsSearchException(e);
         }
     }
 
     @Override
-    public List<String> findNews() throws IOException {
+    public List<String> findNews() throws NewsSearchException {
         SyndFeed syndFeed = parseFeed(url());
         List<String> titles = new ArrayList<>();
         for (SyndEntry entry : syndFeed.getEntries()) {

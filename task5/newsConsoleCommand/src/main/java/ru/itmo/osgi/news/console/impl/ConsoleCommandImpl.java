@@ -7,6 +7,7 @@ import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 import ru.itmo.osgi.news.console.ConsoleCommand;
 import ru.itmo.osgi.news.stats.NewsStats;
+import ru.itmo.osgi.news.stats.exception.NewsSearchException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ import java.util.stream.Collectors;
 )
 @GogoCommand(scope = "news", function = "stats")
 public class ConsoleCommandImpl implements ConsoleCommand {
+    private final static int WORDS_COUNT = 10;
+    private final static int WORD_SIZE_LIMIT = 3;
+
     private final Map<String, NewsStats> newsStats = new ConcurrentHashMap<>();
 
     @Reference(
@@ -80,10 +84,7 @@ public class ConsoleCommandImpl implements ConsoleCommand {
         List<String> strings;
         try {
             strings = stats.findNews();
-        } catch (IOException e) {
-            System.out.println("Network request failed");
-            return;
-        } catch (RuntimeException e) {
+        } catch (NewsSearchException e) {
             System.out.println("Unable to find news by this service");
             return;
         }
@@ -96,12 +97,14 @@ public class ConsoleCommandImpl implements ConsoleCommand {
             }
         }
         String popularWords = words.stream()
+                .filter(s -> s.length() > WORD_SIZE_LIMIT)
+                .map(String::toLowerCase)
                 .collect(Collectors.groupingBy(Function.identity(),
                         Collectors.summingInt(x -> 1)))
                 .entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .limit(10)
+                .limit(WORDS_COUNT)
 //                .map(x -> x.getKey() + "=" + x.getValue())
                 .map(Map.Entry::getKey)
                 .collect(Collectors.joining(", "));

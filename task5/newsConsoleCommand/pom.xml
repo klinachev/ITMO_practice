@@ -27,7 +27,7 @@
     </parent>
 
     <build>
-        <finalName>kav_newsConsoleCommand</finalName>
+        <finalName>kav_news_console_command</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>

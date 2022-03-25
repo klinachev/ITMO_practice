@@ -26,7 +26,7 @@
     </parent>
 
     <build>
-        <finalName>kav_lentaNewsService</finalName>
+        <finalName>kav_lenta_news_service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>

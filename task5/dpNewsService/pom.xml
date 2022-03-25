@@ -26,7 +26,7 @@
     </parent>
 
     <build>
-        <finalName>kav_dpNewsService</finalName>
+        <finalName>kav_dp_news_service</finalName>
         <plugins>
 
             <plugin>
