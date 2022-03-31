@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.itmo.osgi.news.dp</groupId>
-    <artifactId>dp.service</artifactId>
+    <groupId>ru.itmo.osgi.news.helper</groupId>
+    <artifactId>news.helper</artifactId>
     <packaging>bundle</packaging>
     <version>1.0.0</version>
-    <name>dp news service</name>
+    <name>news stats helper service</name>
 
     <dependencies>
         <dependency>
@@ -16,12 +16,6 @@
             <artifactId>news.stats</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>ru.itmo.osgi.news.helper</groupId>
-            <artifactId>news.helper</artifactId>
-            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
@@ -32,15 +26,15 @@
     </parent>
 
     <build>
-        <finalName>kav_dp_news_service</finalName>
+        <finalName>kav_news_helper_service</finalName>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>5.1.4</version>
                 <extensions>true</extensions>
                 <configuration>
+
                     <instructions>
                         <Bundle-SymbolicName>
                             ${project.artifactId}
@@ -52,7 +46,7 @@
                             ${project.version}
                         </Bundle-Version>
                         <Export-Package>
-                            ru.itmo.osgi.news.dp.*
+                            ru.itmo.osgi.news.helper.*
                         </Export-Package>
                         <Include-Resource>
                             src/main/java,

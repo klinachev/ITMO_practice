@@ -17,6 +17,11 @@
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>ru.itmo.osgi.news.helper</groupId>
+            <artifactId>news.helper</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <parent>

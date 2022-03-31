@@ -23,6 +23,15 @@
             <artifactId>rome</artifactId>
             <version>1.15.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.service.metatype.annotations -->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.metatype.annotations</artifactId>
+            <version>1.4.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+
 
     </dependencies>
     <modules>
@@ -31,6 +40,7 @@
         <module>lentaNewsService</module>
         <module>aifNewsService</module>
         <module>dpNewsService</module>
+        <module>abstractNewsService</module>
     </modules>
 
 </project>

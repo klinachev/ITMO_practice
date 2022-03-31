@@ -1,15 +1,15 @@
 package ru.itmo.osgi.news.console.impl;
 
 import org.apache.felix.service.command.annotations.GogoCommand;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferenceCardinality;
-import org.osgi.service.component.annotations.ReferencePolicy;
+import org.osgi.service.component.annotations.*;
+import org.osgi.service.metatype.annotations.AttributeDefinition;
+import org.osgi.service.metatype.annotations.AttributeType;
+import org.osgi.service.metatype.annotations.Designate;
+import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 import ru.itmo.osgi.news.console.ConsoleCommand;
-import ru.itmo.osgi.news.stats.NewsStats;
-import ru.itmo.osgi.news.stats.exception.NewsSearchException;
+import ru.itmo.osgi.news.stats.NewsService;
+import ru.itmo.osgi.news.stats.exception.NewsServiceException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -25,39 +25,54 @@ import java.util.stream.Collectors;
         immediate = true
 )
 @GogoCommand(scope = "news", function = "stats")
+@Designate(ocd = ConsoleCommandImpl.CommandConfig.class)
 public class ConsoleCommandImpl implements ConsoleCommand {
-    private final static int WORDS_COUNT = 10;
-    private final static int WORD_SIZE_LIMIT = 3;
+    private CommandConfig config;
 
-    private final Map<String, NewsStats> newsStats = new ConcurrentHashMap<>();
+    @ObjectClassDefinition(name = "News stats command config")
+    @interface CommandConfig {
+        @AttributeDefinition(name = "words count", type = AttributeType.INTEGER)
+        int wordsCount() default 10;
+
+        @AttributeDefinition(name = "min word size", type = AttributeType.INTEGER)
+        int wordSizeLimit() default 3;
+    }
+
+    @Activate
+    void activate(CommandConfig config) {
+        this.config = config;
+    }
+
+
+    private final Map<String, NewsService> newsStats = new ConcurrentHashMap<>();
 
     @Reference(
-            service = NewsStats.class,
+            service = NewsService.class,
             cardinality = ReferenceCardinality.MULTIPLE,
             policy = ReferencePolicy.DYNAMIC
     )
-    protected void bindNewsStats(NewsStats stats) {
+    protected void bindNewsStats(NewsService stats) {
         newsStats.put(stats.commandName(), stats);
     }
 
-    protected void unbindNewsStats(NewsStats stats) {
-        newsStats.remove(stats.commandName());
+    protected void unbindNewsStats(NewsService stats) {
+        newsStats.remove(stats.commandName(), stats);
     }
 
-    private void addService(StringBuilder sb, NewsStats stats) {
+    private void addService(StringBuilder sb, NewsService stats) {
         if (stats == null) {
             return;
         }
         sb.append("command: ")
                 .append(stats.commandName())
                 .append(", service name: ")
-                .append(stats.fullServiceName())
+                .append(stats.description())
                 .append("\n");
     }
 
-    private String availableServices() {
+    private String getAvailableServices() {
         StringBuilder sb = new StringBuilder();
-        for (NewsStats ns : newsStats.values()) {
+        for (NewsService ns : newsStats.values()) {
             addService(sb, ns);
         }
         return sb.toString();
@@ -65,7 +80,7 @@ public class ConsoleCommandImpl implements ConsoleCommand {
 
     @Override
     public void stats() {
-        String names = availableServices();
+        String names = getAvailableServices();
         if (names.isEmpty()) {
             System.out.println("There is no available services");
         } else {
@@ -74,20 +89,7 @@ public class ConsoleCommandImpl implements ConsoleCommand {
         }
     }
 
-    public void stats(String arg) {
-        NewsStats stats = this.newsStats.get(arg);
-        if (stats == null) {
-            System.out.println("This service is not available");
-            return;
-        }
-
-        List<String> strings;
-        try {
-            strings = stats.findNews();
-        } catch (NewsSearchException e) {
-            System.out.println("Unable to find news by this service");
-            return;
-        }
+    private List<String> getWords(List<String> strings) {
         List<String> words = new ArrayList<>();
         Pattern pattern = Pattern.compile("[\\wа-яА-Я]+");
         for (String s : strings) {
@@ -96,19 +98,39 @@ public class ConsoleCommandImpl implements ConsoleCommand {
                 words.add(matcher.group());
             }
         }
-        String popularWords = words.stream()
-                .filter(s -> s.length() > WORD_SIZE_LIMIT)
+        return words;
+    }
+
+    private String getPopularWordsString(List<String> words) {
+        return words.stream()
+                .filter(s -> s.length() > config.wordSizeLimit())
                 .map(String::toLowerCase)
                 .collect(Collectors.groupingBy(Function.identity(),
                         Collectors.summingInt(x -> 1)))
                 .entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .limit(WORDS_COUNT)
-//                .map(x -> x.getKey() + "=" + x.getValue())
+                .limit(config.wordsCount())
                 .map(Map.Entry::getKey)
                 .collect(Collectors.joining(", "));
-        System.out.println(popularWords);
+    }
+
+    public void stats(String arg) {
+        NewsService stats = this.newsStats.get(arg);
+        if (stats == null) {
+            System.out.println("This service is not available");
+            return;
+        }
+
+        List<String> strings;
+        try {
+            strings = stats.findNews();
+        } catch (NewsServiceException e) {
+            System.out.println("Unable to find news by this service");
+            return;
+        }
+        List<String> words = getWords(strings);
+        System.out.println(getPopularWordsString(words));
     }
 
     @Override
